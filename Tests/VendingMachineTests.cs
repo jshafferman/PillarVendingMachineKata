@@ -25,5 +25,18 @@ namespace Tests
             // Assert
             Assert.AreEqual("INSERT COINS", message);
         }
+
+        [Test]
+        public void GivenANickelIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
+        {
+            // Arrange
+            sut.InsertCoin("NICKEL");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.05", message);
+        }
     }
 }

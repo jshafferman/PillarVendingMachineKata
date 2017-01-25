@@ -16,5 +16,10 @@
         {
             displayMessage = "INSERT COINS";
         }
+
+        public void InsertCoin(string coinName)
+        {
+            displayMessage = "0.05";
+        }
     }
 }
