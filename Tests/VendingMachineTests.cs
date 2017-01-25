@@ -38,5 +38,18 @@ namespace Tests
             // Assert
             Assert.AreEqual("0.05", message);
         }
+
+        [Test]
+        public void GivenADimeIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
+        {
+            // Arrange
+            sut.InsertCoin("DIME");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.10", message);
+        }
     }
 }

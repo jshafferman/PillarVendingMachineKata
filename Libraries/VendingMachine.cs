@@ -19,7 +19,14 @@
 
         public void InsertCoin(string coinName)
         {
-            displayMessage = "0.05";
+            if(coinName == "NICKEL")
+            {
+                displayMessage = "0.05";
+            }
+            else
+            {
+                displayMessage = "0.10";
+            }
         }
     }
 }
