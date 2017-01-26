@@ -9,9 +9,13 @@ namespace Libraries
         private const string FloatPrecision = "n2";
 
         private string displayMessage;
+        private string productDispensed;
+
         private float returnedCoins;
         private float totalCoinsAccepted;
+
         private Dictionary<String, float> coin;
+
         private bool isProductSelected;
 
         public string Display
@@ -45,6 +49,14 @@ namespace Libraries
             get
             {
                 return returnedCoins;
+            }
+        }
+
+        public string ProductDispensed
+        {
+            get
+            {
+                return "COLA";
             }
         }
 

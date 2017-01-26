@@ -348,6 +348,24 @@ namespace Tests
         }
 
         [Test]
+        public void GivenEnoughMoneyHasBeenInsertedWhenColaProductIsSelectedThenProductIsDispensed()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+
+            sut.SelectProduct("COLA");
+
+            // Act
+            string product = sut.ProductDispensed;
+
+            // Assert
+            Assert.AreEqual("COLA", product);
+        }
+
+        [Test]
         public void GivenNoMoneyHasBeenInsertedWhenColaProductPriceHasAlreadyBeenShownThenDisplayShowsInsertCoins()
         {
             // Arrange
