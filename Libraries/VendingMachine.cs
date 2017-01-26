@@ -17,40 +17,23 @@ namespace Libraries
 
         private Dictionary<String, float> coin;
 
-        private bool isProductSelected;
-
         public string Display
         {
             get
             {
-                if(isProductSelected)
+                string currentMessage = displayMessage;
+
+                // Note to self, state change in getter method is not a good idea
+                if(totalCoinsAccepted == 0)
                 {
-                    if(totalCoinsAccepted >= priceOfProduct)
-                    {
-                        displayMessage = "THANK YOU";
-
-                        totalCoinsAccepted = 0;
-                    }
-                    else
-                    {
-                        displayMessage = priceOfProduct.ToString(FloatPrecision);
-                    }
-
-                    isProductSelected = false;
+                    displayMessage = InsertCoins;
                 }
                 else
                 {
-                    if(totalCoinsAccepted == 0)
-                    {
-                        displayMessage = InsertCoins;
-                    }
-                    else
-                    {
-                        displayMessage = totalCoinsAccepted.ToString(FloatPrecision);
-                    }
+                    displayMessage = totalCoinsAccepted.ToString(FloatPrecision);
                 }
 
-                return displayMessage;
+                return currentMessage;
             }
         }
 
@@ -75,7 +58,7 @@ namespace Libraries
             displayMessage = InsertCoins;
             returnedCoins = 0;
             totalCoinsAccepted = 0;
-            isProductSelected = false;
+            productDispensed = string.Empty;
 
             coin = new Dictionary<string, float>
             {
@@ -100,6 +83,11 @@ namespace Libraries
             }
 
             totalCoinsAccepted += coinValue;
+
+            if(totalCoinsAccepted > 0)
+            {
+                displayMessage = totalCoinsAccepted.ToString(FloatPrecision);
+            }
         }
 
         private float convertCoinNameToCoinValue(string coinName)
@@ -122,9 +110,18 @@ namespace Libraries
                 priceOfProduct = 0.50f;
             }
 
-            isProductSelected = true;
+            if (priceOfProduct <= totalCoinsAccepted)
+            {
+                displayMessage = "THANK YOU";
 
-            productDispensed = productName;
+                productDispensed = productName;
+
+                totalCoinsAccepted = 0;
+            }
+            else
+            {
+                displayMessage = priceOfProduct.ToString(FloatPrecision);
+            }
         }
     }
 }
