@@ -11,7 +11,8 @@ namespace Tests
         private const string Nickel = "NICKEL";
         private const string Dime = "DIME";
         private const string Quarter = "QUARTER";
-        
+        private const string Cola = "COLA";
+
         private VendingMachine sut;
 
         [SetUp]
@@ -324,7 +325,7 @@ namespace Tests
         public void GivenNoMoneyHasBeenInsertedWhenColaProductIsSelectedThenPriceOfColaIsDisplayed()
         {
             // Arrange
-            sut.SelectProduct("COLA");
+            sut.SelectProduct(Cola);
 
             // Act
             string message = sut.Display;
@@ -338,7 +339,7 @@ namespace Tests
         {
             // Arrange
             sut.InsertCoin(Quarter);
-            sut.SelectProduct("COLA");
+            sut.SelectProduct(Cola);
 
             // Act
             string message = sut.Display;
@@ -356,20 +357,20 @@ namespace Tests
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
 
-            sut.SelectProduct("COLA");
+            sut.SelectProduct(Cola);
 
             // Act
             string product = sut.ProductDispensed;
 
             // Assert
-            Assert.AreEqual("COLA", product);
+            Assert.AreEqual(Cola, product);
         }
 
         [Test]
         public void GivenNoMoneyHasBeenInsertedWhenColaProductPriceHasAlreadyBeenShownThenDisplayShowsInsertCoins()
         {
             // Arrange
-            sut.SelectProduct("COLA");
+            sut.SelectProduct(Cola);
             string firstMessage = sut.Display;
 
             // Act
@@ -384,7 +385,7 @@ namespace Tests
         {
             // Arrange
             sut.InsertCoin(Quarter);
-            sut.SelectProduct("COLA");
+            sut.SelectProduct(Cola);
             string firstMessage = sut.Display;
 
             // Act
