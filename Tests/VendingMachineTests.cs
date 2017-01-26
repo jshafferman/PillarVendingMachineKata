@@ -77,6 +77,20 @@ namespace Tests
         }
 
         [Test]
+        public void GivenANickelHasAlreadyBeenInsertedWhenDimeIsInsertedThenVendingMachineDisplayShowsTotalValue()
+        {
+            // Arrange
+            sut.InsertCoin("NICKEL");
+            sut.InsertCoin("DIME");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.15", message);
+        }
+
+        [Test]
         public void WhenADimeIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
         {
             // Arrange
