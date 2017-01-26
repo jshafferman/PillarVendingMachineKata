@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Libraries
 {
@@ -6,6 +7,8 @@ namespace Libraries
     {
         private string displayMessage;
         private float returnedCoins;
+        private float totalCoinsAccepted;
+        private Dictionary<String, float> coin;
 
         public string Display
         {
@@ -27,6 +30,14 @@ namespace Libraries
         {
             displayMessage = "INSERT COINS";
             returnedCoins = 0;
+            totalCoinsAccepted = 0;
+
+            coin = new Dictionary<string, float>
+            {
+                { "NICKEL", 0.05f },
+                { "DIME", 0.10f },
+                { "QUARTER", 0.25f }
+            };
         }
 
         public void InsertCoin(string coinName)
@@ -41,22 +52,25 @@ namespace Libraries
                 throw new ArgumentException("coinName");
             }
 
-            if(coinName == "NICKEL")
+            float coinValue = convertCoinNameToCoinValue(coinName);
+
+            totalCoinsAccepted += coinValue;
+
+            if(totalCoinsAccepted > 0)
             {
-                displayMessage = "0.05";
+                displayMessage = totalCoinsAccepted.ToString("n2");
             }
-            else if(coinName == "DIME")
-            {
-                displayMessage = "0.10";
-            }
-            else if(coinName == "QUARTER")
-            {
-                displayMessage = "0.25";
-            }
-            else
-            {
-                returnedCoins = 1;
-            }
+
+            returnedCoins = 1;
+        }
+
+        private float convertCoinNameToCoinValue(string coinName)
+        {
+            float value;
+
+            coin.TryGetValue(coinName, out value);
+
+            return value;
         }
     }
 }
