@@ -9,11 +9,26 @@ namespace Libraries
         private float returnedCoins;
         private float totalCoinsAccepted;
         private Dictionary<String, float> coin;
+        private bool isProductSelected;
 
         public string Display
         {
             get
             {
+                if(isProductSelected)
+                {
+                    displayMessage = "1.00";
+
+                    isProductSelected = false;
+                }
+                else
+                {
+                    if(totalCoinsAccepted == 0)
+                    {
+                        displayMessage = "INSERT COINS";
+                    }
+                }
+
                 return displayMessage;
             }
         }
@@ -31,6 +46,7 @@ namespace Libraries
             displayMessage = "INSERT COINS";
             returnedCoins = 0;
             totalCoinsAccepted = 0;
+            isProductSelected = false;
 
             coin = new Dictionary<string, float>
             {
@@ -73,7 +89,7 @@ namespace Libraries
 
         public void SelectProduct(string productName)
         {
-            displayMessage = "1.00";
+            isProductSelected = true;
         }
     }
 }
