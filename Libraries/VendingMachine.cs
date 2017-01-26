@@ -1,4 +1,6 @@
-﻿namespace Libraries
+﻿using System;
+
+namespace Libraries
 {
     public class VendingMachine
     {
@@ -29,6 +31,11 @@
 
         public void InsertCoin(string coinName)
         {
+            if(coinName == null)
+            {
+                throw new ArgumentNullException("coinName");
+            }
+
             if(coinName == "NICKEL")
             {
                 displayMessage = "0.05";

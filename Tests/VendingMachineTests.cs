@@ -1,5 +1,6 @@
 ﻿using Libraries;
 using NUnit.Framework;
+using System;
 
 namespace Tests
 {
@@ -24,6 +25,17 @@ namespace Tests
 
             // Assert
             Assert.AreEqual("INSERT COINS", message);
+        }
+
+        [Test]
+        public void WhenCoinValueIsNullThenTheVendingMachineThrowsNullArgumentError()
+        {
+            Assert.Throws<ArgumentNullException>(new TestDelegate(NullCoinNameInsertCoin));
+        }
+
+        private void NullCoinNameInsertCoin()
+        {
+            sut.InsertCoin(null);
         }
 
         [Test]
