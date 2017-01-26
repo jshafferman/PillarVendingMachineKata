@@ -54,16 +54,16 @@ namespace Libraries
 
             float coinValue = convertCoinNameToCoinValue(coinName);
 
+            if (coinValue == 0)
+            {
+                returnedCoins = 1;
+            }
+
             totalCoinsAccepted += coinValue;
 
             if(totalCoinsAccepted > 0)
             {
                 displayMessage = totalCoinsAccepted.ToString("n2");
-            }
-
-            if(coinValue == 0)
-            {
-                returnedCoins = 1;
             }
         }
 
