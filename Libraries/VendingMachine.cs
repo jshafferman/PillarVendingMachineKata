@@ -66,7 +66,7 @@ namespace Libraries
         {
             get
             {
-                return "COLA";
+                return productDispensed;
             }
         }
 
@@ -123,6 +123,8 @@ namespace Libraries
             }
 
             isProductSelected = true;
+
+            productDispensed = productName;
         }
     }
 }
