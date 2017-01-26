@@ -77,5 +77,18 @@ namespace Tests
             // Assert
             Assert.AreEqual("INSERT COINS", message);
         }
+
+        [Test]
+        public void WhenAPennyIsInsertedIntoTheVendingMachineThenVendingMachineReturnsPenny()
+        {
+            // Arrange
+            sut.InsertCoin("PENNY");
+
+            // Act
+            float returnTrayValue = sut.ReturnedCoins;
+
+            // Assert
+            Assert.AreEqual(1, returnTrayValue);
+        }
     }
 }

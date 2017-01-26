@@ -3,6 +3,7 @@
     public class VendingMachine
     {
         private string displayMessage;
+        private float returnedCoins;
 
         public string Display
         {
@@ -12,9 +13,18 @@
             }
         }
 
+        public float ReturnedCoins
+        {
+            get
+            {
+                return returnedCoins;
+            }
+        }
+
         public VendingMachine()
         {
             displayMessage = "INSERT COINS";
+            returnedCoins = 0;
         }
 
         public void InsertCoin(string coinName)
@@ -30,6 +40,10 @@
             else if(coinName == "QUARTER")
             {
                 displayMessage = "0.25";
+            }
+            else
+            {
+                returnedCoins = 1;
             }
         }
     }
