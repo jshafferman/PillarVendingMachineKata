@@ -23,9 +23,13 @@
             {
                 displayMessage = "0.05";
             }
-            else
+            else if(coinName == "DIME")
             {
                 displayMessage = "0.10";
+            }
+            else
+            {
+                displayMessage = "0.25";
             }
         }
     }

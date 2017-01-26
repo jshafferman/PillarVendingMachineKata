@@ -27,7 +27,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenANickelIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
+        public void WhenANickelIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
         {
             // Arrange
             sut.InsertCoin("NICKEL");
@@ -40,7 +40,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenADimeIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
+        public void WhenADimeIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
         {
             // Arrange
             sut.InsertCoin("DIME");
@@ -50,6 +50,19 @@ namespace Tests
 
             // Assert
             Assert.AreEqual("0.10", message);
+        }
+
+        [Test]
+        public void WhenAQuarterIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
+        {
+            // Arrange
+            sut.InsertCoin("QUARTER");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.25", message);
         }
     }
 }
