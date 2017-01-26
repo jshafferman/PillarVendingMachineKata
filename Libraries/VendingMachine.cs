@@ -70,5 +70,10 @@ namespace Libraries
 
             return value;
         }
+
+        public void SelectProduct(string productName)
+        {
+            displayMessage = "1.00";
+        }
     }
 }

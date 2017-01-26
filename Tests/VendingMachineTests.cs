@@ -319,5 +319,18 @@ namespace Tests
             // Assert
             Assert.AreEqual(0, returnTrayValue);
         }
+
+        [Test]
+        public void GivenNoMoneyHasBeenInsertedWhenColaProductIsSelectedThenPriceOfColaIsDisplayed()
+        {
+            // Arrange
+            sut.SelectProduct("COLA");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("1.00", message);
+        }
     }
 }
