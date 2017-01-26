@@ -153,5 +153,18 @@ namespace Tests
             // Assert
             Assert.AreEqual(0, returnTrayValue);
         }
+
+        [Test]
+        public void WhenAQuarterIsIsInsertedIntoVendingMachineThenReturnTrayIsEmpty()
+        {
+            // Arrange
+            sut.InsertCoin("QUARTER");
+
+            // Act
+            float returnTrayValue = sut.ReturnedCoins;
+
+            // Assert
+            Assert.AreEqual(0, returnTrayValue);
+        }
     }
 }
