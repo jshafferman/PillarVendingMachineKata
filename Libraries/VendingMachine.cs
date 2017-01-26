@@ -28,12 +28,13 @@ namespace Libraries
                     if(totalCoinsAccepted >= priceOfProduct)
                     {
                         displayMessage = "THANK YOU";
+
+                        totalCoinsAccepted = 0;
                     }
                     else
                     {
                         displayMessage = "1.00";
                     }
-                    
 
                     isProductSelected = false;
                 }
