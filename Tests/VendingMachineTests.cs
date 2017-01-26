@@ -127,5 +127,18 @@ namespace Tests
             // Assert
             Assert.AreEqual(1, returnTrayValue);
         }
+
+        [Test]
+        public void WhenACoinOtherThanPennyIsInsertedIntoVendingMachineThenReturnTrayIsEmpty()
+        {
+            // Arrange
+            sut.InsertCoin("NICKEL");
+
+            // Act
+            float returnTrayValue = sut.ReturnedCoins;
+
+            // Assert
+            Assert.AreEqual(0, returnTrayValue);
+        }
     }
 }

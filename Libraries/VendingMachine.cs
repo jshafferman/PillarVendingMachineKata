@@ -61,7 +61,10 @@ namespace Libraries
                 displayMessage = totalCoinsAccepted.ToString("n2");
             }
 
-            returnedCoins = 1;
+            if(coinValue == 0)
+            {
+                returnedCoins = 1;
+            }
         }
 
         private float convertCoinNameToCoinValue(string coinName)
