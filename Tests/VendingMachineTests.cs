@@ -173,6 +173,48 @@ namespace Tests
         }
 
         [Test]
+        public void GivenAQuarterlHasAlreadyBeenInsertedWhenAnotherQuarterIsInsertedThenVendingMachineDisplayShowsTotalValue()
+        {
+            // Arrange
+            sut.InsertCoin("QUARTER");
+            sut.InsertCoin("QUARTER");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.50", message);
+        }
+
+        [Test]
+        public void GivenAQuarterHasAlreadyBeenInsertedWhenNickelsInsertedThenVendingMachineDisplayShowsTotalValue()
+        {
+            // Arrange
+            sut.InsertCoin("QUARTER");
+            sut.InsertCoin("NICKEL");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.30", message);
+        }
+
+        [Test]
+        public void GivenAQuarterHasAlreadyBeenInsertedWhenDimeInsertedThenVendingMachineDisplayShowsTotalValue()
+        {
+            // Arrange
+            sut.InsertCoin("QUARTER");
+            sut.InsertCoin("DIME");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.35", message);
+        }
+
+        [Test]
         public void WhenAPennyIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsInsertCoinsMessage()
         {
             // Arrange
