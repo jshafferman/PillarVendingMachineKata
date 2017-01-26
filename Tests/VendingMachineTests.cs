@@ -1,6 +1,5 @@
 ﻿using Libraries;
 using NUnit.Framework;
-using System;
 
 namespace Tests
 {
@@ -19,18 +18,12 @@ namespace Tests
         public void Init()
         {
             sut = new VendingMachine();
-        }
 
-        [Test]
-        public void WhenNoCoinsHaveBeenAddedToTheVendingMachineThenVendingMachineDisplaysInsertCoinsMessage()
-        {
-            // Arrange
+            var message = sut.Display;
+            var returnTray = sut.ReturnedCoins;
 
-            // Act
-            string message = sut.Display;
-
-            // Assert
             Assert.AreEqual(InsertCoins, message);
+            Assert.AreEqual(0, returnTray);
         }
 
         [Test]
