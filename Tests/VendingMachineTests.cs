@@ -129,10 +129,23 @@ namespace Tests
         }
 
         [Test]
-        public void WhenACoinOtherThanPennyIsInsertedIntoVendingMachineThenReturnTrayIsEmpty()
+        public void WhenANickelIsIsInsertedIntoVendingMachineThenReturnTrayIsEmpty()
         {
             // Arrange
             sut.InsertCoin("NICKEL");
+
+            // Act
+            float returnTrayValue = sut.ReturnedCoins;
+
+            // Assert
+            Assert.AreEqual(0, returnTrayValue);
+        }
+
+        [Test]
+        public void WhenADimeIsIsInsertedIntoVendingMachineThenReturnTrayIsEmpty()
+        {
+            // Arrange
+            sut.InsertCoin("DIME");
 
             // Act
             float returnTrayValue = sut.ReturnedCoins;
