@@ -49,7 +49,12 @@ namespace Libraries
         {
             get
             {
-                return productDispensed;
+                string currentProduct = productDispensed;
+
+                // Again not a fan of state change in a getter method
+                productDispensed = string.Empty;
+
+                return currentProduct;
             }
         }
 

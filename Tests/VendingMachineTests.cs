@@ -367,6 +367,25 @@ namespace Tests
         }
 
         [Test]
+        public void GivenEnoughMoneyHasBeenInsertedWhenProductHasAlreadyBeenDispensedThenProductDispensedShouldBeEmpty()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+
+            sut.SelectProduct(Cola);
+            string productDispensed = sut.ProductDispensed;
+
+            // Act
+            string productInDispenser = sut.ProductDispensed;
+
+            // Assert
+            Assert.AreEqual(string.Empty, productInDispenser);
+        }
+
+        [Test]
         public void GivenNotEnoughMoneyHasBeenInsertedWhenColaProductIsSelectedThenDispenseProductIsEmpty()
         {
             // Arrange
@@ -379,6 +398,21 @@ namespace Tests
 
             // Assert
             Assert.AreEqual(string.Empty, product);
+        }
+
+        [Test]
+        public void GivenEnoughMoneyHasBeenInsertedWhenChipProductIsSelectedThenProductIsDispensed()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.SelectProduct("CHIPS");
+
+            // Act
+            string product = sut.ProductDispensed;
+
+            // Assert
+            Assert.AreEqual("CHIPS", product);
         }
 
         [Test]
@@ -487,21 +521,6 @@ namespace Tests
 
             // Assert
             Assert.AreEqual("0.10", message);
-        }
-
-        [Test]
-        public void GivenEnoughMoneyHasBeenInsertedWhenChipProductIsSelectedThenProductIsDispensed()
-        {
-            // Arrange
-            sut.InsertCoin(Quarter);
-            sut.InsertCoin(Quarter);
-            sut.SelectProduct("CHIPS");
-
-            // Act
-            string product = sut.ProductDispensed;
-
-            // Assert
-            Assert.AreEqual("CHIPS", product);
         }
     }
 }
