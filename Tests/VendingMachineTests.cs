@@ -446,7 +446,21 @@ namespace Tests
         }
 
         [Test]
-        public void GivenNotEnoughMoneyHasBeenInsertedWhenProductPriceHasAlreadyBeenDisplayedThenDisplayShowsTotalAcceptedCoins()
+        public void GivenNoMoneyHasBeenInsertedWhenChipPriceHasAlreadyBeenDisplayedThenDisplayShowsInsertCoins()
+        {
+            // Arrange
+            sut.SelectProduct("CHIPS");
+            string firstMessage = sut.Display;
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual(InsertCoins, message);
+        }
+
+        [Test]
+        public void GivenNotEnoughMoneyHasBeenInsertedWhenChipProductPriceHasAlreadyBeenDisplayedThenDisplayShowsTotalAcceptedCoins()
         {
             // Arrange
             sut.InsertCoin(Dime);
