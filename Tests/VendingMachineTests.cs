@@ -39,6 +39,17 @@ namespace Tests
         }
 
         [Test]
+        public void WhenCoinValueIsEmptyThenTheVendingMachineThrowsArugmentError()
+        {
+            Assert.Throws<ArgumentException>(new TestDelegate(EmptyCoinNameInsertCoin));
+        }
+
+        private void EmptyCoinNameInsertCoin()
+        {
+            sut.InsertCoin("");
+        }
+
+        [Test]
         public void WhenANickelIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
         {
             // Arrange

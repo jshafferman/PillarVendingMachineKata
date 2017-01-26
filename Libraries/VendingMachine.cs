@@ -36,6 +36,11 @@ namespace Libraries
                 throw new ArgumentNullException("coinName");
             }
 
+            if(coinName == "")
+            {
+                throw new ArgumentException("coinName");
+            }
+
             if(coinName == "NICKEL")
             {
                 displayMessage = "0.05";
