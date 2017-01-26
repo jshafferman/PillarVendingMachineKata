@@ -105,6 +105,20 @@ namespace Tests
         }
 
         [Test]
+        public void GivenANickelHasAlreadyBeenInsertedWhenAPennyIsInsertedThenVendingMachineDisplayShowsTotalValue()
+        {
+            // Arrange
+            sut.InsertCoin("NICKEL");
+            sut.InsertCoin("PENNY");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.05", message);
+        }
+
+        [Test]
         public void WhenADimeIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
         {
             // Arrange
@@ -160,6 +174,20 @@ namespace Tests
         }
 
         [Test]
+        public void GivenADimeHasAlreadyBeenInsertedWhenAPennyIsInsertedThenVendingMachineDisplayShowsTotalValue()
+        {
+            // Arrange
+            sut.InsertCoin("DIME");
+            sut.InsertCoin("PENNY");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.10", message);
+        }
+
+        [Test]
         public void WhenAQuarterIsInsertedIntoTheVendingMachineThenVendingMachineDisplayShowsTotalValue()
         {
             // Arrange
@@ -212,6 +240,20 @@ namespace Tests
 
             // Assert
             Assert.AreEqual("0.35", message);
+        }
+
+        [Test]
+        public void GivenAQuarterHasAlreadyBeenInsertedWhenAPennyInsertedThenVendingMachineDisplayShowsTotalValue()
+        {
+            // Arrange
+            sut.InsertCoin("QUARTER");
+            sut.InsertCoin("PENNY");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.25", message);
         }
 
         [Test]
