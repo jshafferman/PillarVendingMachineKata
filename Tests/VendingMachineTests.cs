@@ -22,9 +22,11 @@ namespace Tests
 
             var message = sut.Display;
             var returnTray = sut.ReturnedCoins;
+            var productDispenser = sut.ProductDispensed;
 
             Assert.AreEqual(InsertCoins, message);
             Assert.AreEqual(0, returnTray);
+            Assert.AreEqual(string.Empty, productDispenser);
         }
 
         [Test]
