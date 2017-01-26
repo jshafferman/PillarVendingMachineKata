@@ -27,7 +27,7 @@
             {
                 displayMessage = "0.10";
             }
-            else
+            else if(coinName == "QUARTER")
             {
                 displayMessage = "0.25";
             }
