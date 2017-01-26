@@ -13,6 +13,7 @@ namespace Libraries
 
         private float returnedCoins;
         private float totalCoinsAccepted;
+        private float priceOfProduct;
 
         private Dictionary<String, float> coin;
 
@@ -24,7 +25,15 @@ namespace Libraries
             {
                 if(isProductSelected)
                 {
-                    displayMessage = "1.00";
+                    if(totalCoinsAccepted >= priceOfProduct)
+                    {
+                        displayMessage = "THANK YOU";
+                    }
+                    else
+                    {
+                        displayMessage = "1.00";
+                    }
+                    
 
                     isProductSelected = false;
                 }
@@ -103,6 +112,7 @@ namespace Libraries
 
         public void SelectProduct(string productName)
         {
+            priceOfProduct = 1.00f;
             isProductSelected = true;
         }
     }
