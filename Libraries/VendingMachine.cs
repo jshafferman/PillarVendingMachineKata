@@ -33,7 +33,7 @@ namespace Libraries
                     }
                     else
                     {
-                        displayMessage = "1.00";
+                        displayMessage = priceOfProduct.ToString(FloatPrecision);
                     }
 
                     isProductSelected = false;
@@ -113,7 +113,15 @@ namespace Libraries
 
         public void SelectProduct(string productName)
         {
-            priceOfProduct = 1.00f;
+            if(productName == "COLA")
+            {
+                priceOfProduct = 1.00f;
+            }
+            else
+            {
+                priceOfProduct = 0.50f;
+            }
+
             isProductSelected = true;
         }
     }

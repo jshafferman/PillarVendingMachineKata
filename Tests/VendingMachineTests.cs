@@ -431,5 +431,18 @@ namespace Tests
             // Assert
             Assert.AreEqual("0.25", message);
         }
+
+        [Test]
+        public void GivenNoMoneyHasBeenInsertedWhenChipsProductHasBeenSelectedThenDisplayShowsPriceOfChips()
+        {
+            // Arrange
+            sut.SelectProduct("CHIPS");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.50", message);
+        }
     }
 }
