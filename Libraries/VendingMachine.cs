@@ -42,14 +42,9 @@ namespace Libraries
 
         public void InsertCoin(string coinName)
         {
-            if(coinName == null)
+            if(String.IsNullOrWhiteSpace(coinName))
             {
-                throw new ArgumentNullException("coinName");
-            }
-
-            if(coinName == "")
-            {
-                throw new ArgumentException("coinName");
+                throw new InvalidCoinNameException(coinName);
             }
 
             float coinValue = convertCoinNameToCoinValue(coinName);

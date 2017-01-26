@@ -36,7 +36,7 @@ namespace Tests
         [Test]
         public void WhenCoinValueIsNullThenTheVendingMachineThrowsNullArgumentError()
         {
-            Assert.Throws<ArgumentNullException>(new TestDelegate(NullCoinNameInsertCoin));
+            Assert.Throws<InvalidCoinNameException>(new TestDelegate(NullCoinNameInsertCoin));
         }
 
         private void NullCoinNameInsertCoin()
@@ -47,7 +47,7 @@ namespace Tests
         [Test]
         public void WhenCoinValueIsEmptyThenTheVendingMachineThrowsArugmentError()
         {
-            Assert.Throws<ArgumentException>(new TestDelegate(EmptyCoinNameInsertCoin));
+            Assert.Throws<InvalidCoinNameException>(new TestDelegate(EmptyCoinNameInsertCoin));
         }
 
         private void EmptyCoinNameInsertCoin()
