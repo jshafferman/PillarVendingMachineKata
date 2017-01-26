@@ -5,6 +5,9 @@ namespace Libraries
 {
     public class VendingMachine
     {
+        private const string InsertCoins = "INSERT COINS";
+        private const string FloatPrecision = "n2";
+
         private string displayMessage;
         private float returnedCoins;
         private float totalCoinsAccepted;
@@ -25,7 +28,11 @@ namespace Libraries
                 {
                     if(totalCoinsAccepted == 0)
                     {
-                        displayMessage = "INSERT COINS";
+                        displayMessage = InsertCoins;
+                    }
+                    else
+                    {
+                        displayMessage = totalCoinsAccepted.ToString(FloatPrecision);
                     }
                 }
 
@@ -43,7 +50,7 @@ namespace Libraries
 
         public VendingMachine()
         {
-            displayMessage = "INSERT COINS";
+            displayMessage = InsertCoins;
             returnedCoins = 0;
             totalCoinsAccepted = 0;
             isProductSelected = false;
@@ -71,11 +78,6 @@ namespace Libraries
             }
 
             totalCoinsAccepted += coinValue;
-
-            if(totalCoinsAccepted > 0)
-            {
-                displayMessage = totalCoinsAccepted.ToString("n2");
-            }
         }
 
         private float convertCoinNameToCoinValue(string coinName)
