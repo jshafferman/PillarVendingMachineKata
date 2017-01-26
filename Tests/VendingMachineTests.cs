@@ -418,7 +418,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenNotEnoughMoneyHasBeenInsertedWhenColaProductPriceHasAlreadyBeenShownThenDisplayShowsInsertCoins()
+        public void GivenNotEnoughMoneyHasBeenInsertedWhenColaProductPriceHasAlreadyBeenShownThenDisplayShowsTotalAcceptedCoins()
         {
             // Arrange
             sut.InsertCoin(Quarter);
