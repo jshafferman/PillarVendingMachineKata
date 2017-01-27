@@ -7,6 +7,9 @@ namespace Libraries
     {
         private const string InsertCoins = "INSERT COINS";
         private const string FloatPrecision = "n2";
+        private const string Cola = "COLA";
+        private const string Chips = "CHIPS";
+        private const string Candy = "CANDY";
 
         private string displayMessage;
         private string productDispensed;
@@ -17,6 +20,7 @@ namespace Libraries
 
         private Dictionary<String, int> coin;
         private Dictionary<String, int> productPrice;
+        private Dictionary<String, int> numberOfProductInMachine;
 
         public string Display
         {
@@ -76,9 +80,16 @@ namespace Libraries
 
             productPrice = new Dictionary<string, int>
             {
-                { "COLA", 100 },
-                { "CHIPS", 50 },
-                { "CANDY", 65 }
+                { Cola , 100 },
+                { Chips, 50 },
+                { Candy, 65 }
+            };
+
+            numberOfProductInMachine = new Dictionary<string, int>
+            {
+                { Cola, 0 },
+                { Chips, 0 },
+                { Candy, 0 }
             };
         }
 
@@ -124,20 +135,36 @@ namespace Libraries
 
             priceOfProduct = value;
 
-            if (priceOfProduct <= totalCoinsAccepted)
+            int numberInMachine = numberOfProductInMachine[productName];
+
+            if (numberInMachine > 0)
             {
-                displayMessage = "THANK YOU";
+                if(priceOfProduct <= totalCoinsAccepted)
+                {
+                    displayMessage = "THANK YOU";
 
-                productDispensed = productName;
+                    productDispensed = productName;
 
-                returnedCoins = totalCoinsAccepted - priceOfProduct;
+                    returnedCoins = totalCoinsAccepted - priceOfProduct;
 
-                totalCoinsAccepted = 0;
+                    totalCoinsAccepted = 0;
+                }
+                else
+                {
+                    displayMessage = convertIntToString(priceOfProduct);
+                }
             }
             else
             {
-                displayMessage = convertIntToString(priceOfProduct);
+                displayMessage = "SOLD OUT";
             }
+        }
+
+        private string convertIntToString(int value)
+        {
+            float floatValue = value / 100.0f;
+
+            return floatValue.ToString(FloatPrecision);
         }
 
         public void SelectReturnCoins()
@@ -149,11 +176,9 @@ namespace Libraries
             displayMessage = InsertCoins;
         }
 
-        private string convertIntToString(int value)
+        public void AddProductToMachine(string productName)
         {
-            float floatValue = value / 100.0f;
-
-            return floatValue.ToString(FloatPrecision);
+            numberOfProductInMachine[productName]++;
         }
     }
 }

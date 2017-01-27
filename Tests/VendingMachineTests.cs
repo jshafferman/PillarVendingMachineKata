@@ -352,6 +352,8 @@ namespace Tests
         public void GivenNoMoneyHasBeenInsertedWhenColaProductIsSelectedThenPriceOfColaIsDisplayed()
         {
             // Arrange
+            sut.AddProductToMachine(Cola);
+
             sut.SelectProduct(Cola);
 
             // Act
@@ -365,7 +367,10 @@ namespace Tests
         public void GivenNotEnoughMoneyHasBeenInsertedWhenColaProductIsSelectedThenPriceOfColaIsDisplayed()
         {
             // Arrange
+            sut.AddProductToMachine(Cola);
+
             sut.InsertCoin(Quarter);
+
             sut.SelectProduct(Cola);
 
             // Act
@@ -379,6 +384,8 @@ namespace Tests
         public void GivenEnoughMoneyHasBeenInsertedWhenColaProductIsSelectedThenProductIsDispensed()
         {
             // Arrange
+            sut.AddProductToMachine(Cola);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
@@ -431,6 +438,8 @@ namespace Tests
         public void GivenEnoughMoneyHasBeenInsertedWhenColaProductHasBeenSelectedThenDisplayShowsThankYou()
         {
             // Arrange
+            sut.AddProductToMachine(Cola);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
@@ -449,6 +458,8 @@ namespace Tests
         public void GivenEnoughMoneyHasBeenInsertedForColaWhenDisplayHasAlreadyShownThankYouThenDisplayShowsInsertCoins()
         {
             // Arrange
+            sut.AddProductToMachine(Cola);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
@@ -497,6 +508,8 @@ namespace Tests
         public void GivenNoMoneyHasBeenInsertedWhenChipsProductHasBeenSelectedThenDisplayShowsPriceOfChips()
         {
             // Arrange
+            sut.AddProductToMachine(Chips);
+
             sut.SelectProduct(Chips);
 
             // Act
@@ -539,6 +552,8 @@ namespace Tests
         public void GivenEnoughMoneyHasBeenInsertedWhenChipProductHasBeenSelectedThenDisplayShowsThankYou()
         {
             // Arrange
+            sut.AddProductToMachine(Chips);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
 
@@ -555,6 +570,8 @@ namespace Tests
         public void GivenEnoughMoneyHasBeenInsertedForChipsWhenDisplayHasAlreadyShownThankYouThenDisplayShowsInsertCoins()
         {
             // Arrange
+            sut.AddProductToMachine(Chips);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
 
@@ -572,6 +589,8 @@ namespace Tests
         public void GivenEnoughMoneyHasBeenInsertedWhenChipProductIsSelectedThenProductIsDispensed()
         {
             // Arrange
+            sut.AddProductToMachine(Chips);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
             sut.SelectProduct(Chips);
@@ -603,6 +622,8 @@ namespace Tests
         public void GivenNoMoneyHasBeenInsertedWhenCandyProductHasBeenSelectedThenDisplayShowsPriceOfCandy()
         {
             // Arrange
+            sut.AddProductToMachine(Candy);
+
             sut.SelectProduct(Candy);
 
             // Act
@@ -645,6 +666,8 @@ namespace Tests
         public void GivenEnoughMoneyHasBeenInsertedWhenCandyProductHasBeenSelectedThenDisplayShowsThankYou()
         {
             // Arrange
+            sut.AddProductToMachine(Candy);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Dime);
@@ -663,6 +686,8 @@ namespace Tests
         public void GivenEnoughMoneyHasBeenInsertedForCandyWhenDisplayHasAlreadyShownThankYouThenDisplayShowsInsertCoins()
         {
             // Arrange
+            sut.AddProductToMachine(Candy);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Dime);
@@ -682,6 +707,8 @@ namespace Tests
         public void GivenEnoughMoneyHasBeenInsertedWhenCandyProductIsSelectedThenProductIsDispensed()
         {
             // Arrange
+            sut.AddProductToMachine(Candy);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Dime);
@@ -720,6 +747,8 @@ namespace Tests
         public void GivenAProductHasBeenSelectedWhenAmountInVendingMachineIsHigherThanProdectThenCorrectChangeIsPlacedInCoinReturn()
         {
             // Arrange
+            sut.AddProductToMachine(Candy);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
@@ -774,6 +803,8 @@ namespace Tests
         public void GivenCoinsHaveBeenReturnedWhenProductIsSelectedThenDisplayShowsProductAmount()
         {
             // Arrange
+            sut.AddProductToMachine(Cola);
+
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
             sut.InsertCoin(Quarter);
@@ -787,6 +818,19 @@ namespace Tests
 
             // Assert
             Assert.AreEqual(ColaDisplayAmount, message);
+        }
+
+        [Test]
+        public void GivenVendingMachineIsSoldOutOfProductWhenProductIsSelectedThenDisplayShowsSoldOutMessage()
+        {
+            // Arrange
+            sut.SelectProduct(Cola);
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("SOLD OUT", message);
         }
     }
 }
