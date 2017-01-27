@@ -85,7 +85,7 @@ namespace Libraries
         {
             if(String.IsNullOrWhiteSpace(coinName))
             {
-                throw new InvalidCoinNameException(coinName);
+                throw new InvalidCoinNameVendingMachineException(coinName);
             }
 
             float coinValue = convertCoinNameToCoinValue(coinName);
@@ -114,7 +114,14 @@ namespace Libraries
 
         public void SelectProduct(string productName)
         {
-            priceOfProduct = productPrice[productName];
+            float value;
+
+            if(!productPrice.TryGetValue(productName, out value))
+            {
+                throw new InvalidProductNameVendingMachineException(productName);
+            }
+
+            priceOfProduct = value;
 
             if (priceOfProduct <= totalCoinsAccepted)
             {

@@ -1,4 +1,5 @@
-﻿using Libraries;
+﻿using System;
+using Libraries;
 using NUnit.Framework;
 
 namespace Tests
@@ -39,9 +40,9 @@ namespace Tests
         }
 
         [Test]
-        public void WhenCoinValueIsNullThenTheVendingMachineThrowsNullArgumentError()
+        public void WhenCoinValueIsNullThenTheVendingMachineThrowsInvalidCoinNameException()
         {
-            Assert.Throws<InvalidCoinNameException>(new TestDelegate(NullCoinNameInsertCoin));
+            Assert.Throws<InvalidCoinNameVendingMachineException>(new TestDelegate(NullCoinNameInsertCoin));
         }
 
         private void NullCoinNameInsertCoin()
@@ -50,9 +51,9 @@ namespace Tests
         }
 
         [Test]
-        public void WhenCoinValueIsEmptyThenTheVendingMachineThrowsArugmentError()
+        public void WhenCoinValueIsEmptyThenTheVendingMachineInvalidCoinNameException()
         {
-            Assert.Throws<InvalidCoinNameException>(new TestDelegate(EmptyCoinNameInsertCoin));
+            Assert.Throws<InvalidCoinNameVendingMachineException>(new TestDelegate(EmptyCoinNameInsertCoin));
         }
 
         private void EmptyCoinNameInsertCoin()
@@ -330,6 +331,17 @@ namespace Tests
 
             // Assert
             Assert.AreEqual(0, returnTrayValue);
+        }
+
+        [Test]
+        public void GivenAProductHasBeenSelectedWhenProductNameIsInvalidThenInvalidProductNameExceptionIsThrown()
+        {
+            Assert.Throws<InvalidProductNameVendingMachineException>(new TestDelegate(InvalidProductNameSelected));
+        }
+
+        private void InvalidProductNameSelected()
+        {
+            sut.SelectProduct("");
         }
 
         [Test]
