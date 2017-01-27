@@ -142,6 +142,8 @@ namespace Libraries
         public void SelectReturnCoins()
         {
             returnedCoins = totalCoinsAccepted;
+
+            displayMessage = InsertCoins;
         }
 
         private string convertIntToString(int value)
