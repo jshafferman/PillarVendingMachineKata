@@ -765,5 +765,24 @@ namespace Tests
             // Assert
             Assert.AreEqual(InsertCoins, message);
         }
+
+        [Test]
+        public void GivenCoinsHaveBeenReturnedWhenProductIsSelectedThenDisplayShowsProductAmount()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+
+            sut.SelectReturnCoins();
+            sut.SelectProduct(Cola);
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("1.00", message);
+        }
     }
 }

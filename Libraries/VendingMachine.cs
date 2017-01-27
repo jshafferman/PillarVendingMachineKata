@@ -143,6 +143,8 @@ namespace Libraries
         {
             returnedCoins = totalCoinsAccepted;
 
+            totalCoinsAccepted = 0;
+
             displayMessage = InsertCoins;
         }
 
