@@ -672,5 +672,25 @@ namespace Tests
             // Assert
             Assert.AreEqual("CANDY", productInDispenser);
         }
+
+        [Test]
+        public void GivenEnoughMoneyHasBeenInsertedWhenCandyProductHasAlreadyBeenDispensedThenProductInDispenserIsEmpty()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Dime);
+            sut.InsertCoin(Nickel);
+
+            sut.SelectProduct("CANDY");
+
+            string productDispesned = sut.ProductDispensed;
+
+            // Act
+            string productInDispenser = sut.ProductDispensed;
+
+            // Assert
+            Assert.AreEqual(string.Empty, productInDispenser);
+        }
     }
 }
