@@ -7,6 +7,7 @@ namespace Tests
     public class VendingMachineTests
     {
         private const string InsertCoins = "INSERT COINS";
+        private const string ThankYou = "THANK YOU";
         private const string Penny = "PENNY";
         private const string Nickel = "NICKEL";
         private const string Dime = "DIME";
@@ -418,7 +419,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("THANK YOU", message);
+            Assert.AreEqual(ThankYou, message);
         }
 
         [Test]
@@ -509,6 +510,22 @@ namespace Tests
 
             // Assert
             Assert.AreEqual("0.10", message);
+        }
+
+        [Test]
+        public void GivenEnoughMoneyHasBeenInsertedWhenChipProductHasBeenDispensedThenDisplayShowsThankYou()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+
+            sut.SelectProduct(Chips);
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual(ThankYou, message);
         }
 
         [Test]
