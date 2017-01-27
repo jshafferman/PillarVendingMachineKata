@@ -351,6 +351,17 @@ namespace Tests
         }
 
         [Test]
+        public void GivenAProductHasBeenAddedToMachineWhenNameIsInvalidThenInvalidProductNameExceptionIsThrown()
+        {
+            Assert.Throws<InvalidProductNameVendingMachineException>(new TestDelegate(InvalidProductNameAdded));
+        }
+
+        private void InvalidProductNameAdded()
+        {
+            sut.AddProductToMachine("");
+        }
+
+        [Test]
         public void GivenNoMoneyHasBeenInsertedWhenColaProductIsSelectedThenPriceOfColaIsDisplayed()
         {
             // Arrange

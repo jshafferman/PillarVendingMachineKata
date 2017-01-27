@@ -274,7 +274,14 @@ namespace Libraries
 
         public void AddProductToMachine(string productName)
         {
-            numberOfProductInMachine[productName]++;
+            int value;
+
+            if(!numberOfProductInMachine.TryGetValue(productName, out value))
+            {
+                throw new InvalidProductNameVendingMachineException(productName);
+            }
+
+            numberOfProductInMachine[productName] = ++value;
         }
     }
 }
