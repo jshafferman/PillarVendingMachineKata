@@ -627,7 +627,7 @@ namespace Tests
             sut.InsertCoin(Dime);
             sut.InsertCoin(Nickel);
 
-            sut.SelectProduct(Chips);
+            sut.SelectProduct("CANDY");
 
             // Act
             string message = sut.Display;
@@ -645,7 +645,7 @@ namespace Tests
             sut.InsertCoin(Dime);
             sut.InsertCoin(Nickel);
 
-            sut.SelectProduct(Chips);
+            sut.SelectProduct("CANDY");
             string firstMessage = sut.Display;
 
             // Act
@@ -653,6 +653,24 @@ namespace Tests
 
             // Assert
             Assert.AreEqual(InsertCoins, message);
+        }
+
+        [Test]
+        public void GivenEnoughMoneyHasBeenInsertedWhenCandyProductIsSelectedThenProductIsDispensed()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Dime);
+            sut.InsertCoin(Nickel);
+
+            sut.SelectProduct("CANDY");
+
+            // Act
+            string productInDispenser = sut.ProductDispensed;
+
+            // Assert
+            Assert.AreEqual("CANDY", productInDispenser);
         }
     }
 }
