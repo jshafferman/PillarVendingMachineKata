@@ -18,6 +18,8 @@ namespace Tests
         private const string Chips = "CHIPS";
         private const string Candy = "CANDY";
 
+        private const string NickelDisplayAmount = "0.05";
+
         private VendingMachine sut;
 
         [SetUp]
@@ -66,7 +68,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("0.05", message);
+            Assert.AreEqual(NickelDisplayAmount, message);
         }
 
         [Test]
@@ -122,7 +124,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("0.05", message);
+            Assert.AreEqual(NickelDisplayAmount, message);
         }
 
         [Test]
@@ -618,7 +620,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("0.05", message);
+            Assert.AreEqual(NickelDisplayAmount, message);
         }
 
         [Test]
