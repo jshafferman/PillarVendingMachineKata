@@ -10,6 +10,7 @@ namespace Tests
         private const string InsertCoins = "INSERT COINS";
         private const string ThankYou = "THANK YOU";
         private const string SoldOut = "SOLD OUT";
+        private const string ExactChange = "EXACT CHANGE ONLY";
 
         private const string Penny = "PENNY";
         private const string Nickel = "NICKEL";
@@ -33,7 +34,7 @@ namespace Tests
         [SetUp]
         public void Init()
         {
-            sut = new VendingMachine();
+            sut = new VendingMachine(50, 50, 50);
 
             var message = sut.Display;
             var returnTray = sut.ReturnedCoins;
@@ -863,6 +864,19 @@ namespace Tests
 
             // Assert
             Assert.AreEqual(QuarterDisplayAmount, message);
+        }
+
+        [Test]
+        public void WhenVendingMachineIsOutOfMoneyToMakeChangeThenDisplayShowsExactChangeOnly()
+        {
+            // Arrange
+            sut = new VendingMachine(0, 0, 0);
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual(ExactChange, message);
         }
     }
 }

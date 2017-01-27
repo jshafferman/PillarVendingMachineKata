@@ -6,10 +6,14 @@ namespace Libraries
     public class VendingMachine
     {
         private const string InsertCoins = "INSERT COINS";
+        private const string ExactChange = "EXACT CHANGE ONLY";
         private const string FloatPrecision = "n2";
         private const string Cola = "COLA";
         private const string Chips = "CHIPS";
         private const string Candy = "CANDY";
+        private const string Nickel = "NICKEL";
+        private const string Dime = "DIME";
+        private const string Quarter = "QUARTER";
 
         private string displayMessage;
         private string productDispensed;
@@ -17,8 +21,10 @@ namespace Libraries
         private int returnedCoins;
         private int totalCoinsAccepted;
         private int priceOfProduct;
+        private int totalCoinValueInMachine;
 
-        private Dictionary<String, int> coin;
+        private Dictionary<String, int> coinValues;
+        private Dictionary<String, int> coinInMachine;
         private Dictionary<String, int> productPrice;
         private Dictionary<String, int> numberOfProductInMachine;
 
@@ -31,7 +37,14 @@ namespace Libraries
                 // CQRS being violated here, however it appears to be part of the acceptance criteria
                 if (totalCoinsAccepted == 0)
                 {
-                    displayMessage = InsertCoins;
+                    if(totalCoinValueInMachine == 0)
+                    {
+                        displayMessage = ExactChange;
+                    }
+                    else
+                    {
+                        displayMessage = InsertCoins;
+                    }
                 }
                 else
                 {
@@ -64,18 +77,27 @@ namespace Libraries
             }
         }
 
-        public VendingMachine()
+        // I am making an assumption that when a vending machine is created
+        // that you will need to specify the amount of nickels, dimes, and quarters
+        // that will be initially in the machine
+        public VendingMachine(int numberOfNickels, int numberOfDimes, int numberOfQuarters)
         {
-            displayMessage = InsertCoins;
             returnedCoins = 0;
             totalCoinsAccepted = 0;
             productDispensed = string.Empty;
 
-            coin = new Dictionary<string, int>
+            coinValues = new Dictionary<string, int>
             {
-                { "NICKEL", 5 },
-                { "DIME", 10 },
-                { "QUARTER", 25 }
+                { Nickel, 5 },
+                { Dime, 10 },
+                { Quarter, 25 }
+            };
+
+            coinInMachine = new Dictionary<string, int>
+            {
+                { Nickel, numberOfNickels },
+                { Dime, numberOfDimes },
+                { Quarter, numberOfQuarters }
             };
 
             productPrice = new Dictionary<string, int>
@@ -91,6 +113,47 @@ namespace Libraries
                 { Chips, 0 },
                 { Candy, 0 }
             };
+
+            totalCoinValueInMachine = calculateTotalInMachine();
+
+            displayMessage = determineDisplayMessage();
+        }
+
+        private string determineDisplayMessage()
+        {
+            // Not the most efficient way to solve this issue, however it does give us
+            // the correct default message and can be adjusted now that tests are in place
+            foreach(var price in productPrice.Values)
+            {
+                var productPrice = price;
+
+               foreach(var coin in coinValues)
+                {
+                    var coinValue = coin.Value;
+                    var coinName = coin.Key;
+
+                    int numberOfCoins = productPrice / coinValue;
+
+                    if(numberOfCoins > 0 && numberOfCoins <= coinInMachine[coinName])
+                    {
+                        productPrice = productPrice - (numberOfCoins * coinValue);
+                    }
+
+                    if(productPrice == 0)
+                    {
+                        return InsertCoins;
+                    }
+                }
+            }
+
+            return ExactChange;
+        }
+
+        private int calculateTotalInMachine()
+        {
+            int total = coinInMachine[Nickel] * 5 + coinInMachine[Dime] * 10 + coinInMachine[Quarter] * 25;
+
+            return total;
         }
 
         public void InsertCoin(string coinName)
@@ -113,13 +176,15 @@ namespace Libraries
             {
                 displayMessage = convertIntToString(totalCoinsAccepted);
             }
+
+            totalCoinValueInMachine += totalCoinsAccepted;
         }
 
         private int convertCoinNameToCoinValue(string coinName)
         {
             int value;
 
-            coin.TryGetValue(coinName, out value);
+            coinValues.TryGetValue(coinName, out value);
 
             return value;
         }
@@ -171,8 +236,11 @@ namespace Libraries
         {
             returnedCoins = totalCoinsAccepted;
 
+            totalCoinValueInMachine -= totalCoinsAccepted;
+
             totalCoinsAccepted = 0;
 
+            
             displayMessage = InsertCoins;
         }
 
