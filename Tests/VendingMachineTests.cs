@@ -520,10 +520,10 @@ namespace Tests
             sut.SelectProduct(Chips);
 
             // Act
-            string product = sut.ProductDispensed;
+            string productInDispenser = sut.ProductDispensed;
 
             // Assert
-            Assert.AreEqual(Chips, product);
+            Assert.AreEqual(Chips, productInDispenser);
         }
     }
 }
