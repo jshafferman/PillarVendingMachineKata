@@ -288,7 +288,7 @@ namespace Tests
             sut.InsertCoin(Penny);
 
             // Act
-            float returnTrayValue = sut.ReturnedCoins;
+            int returnTrayValue = sut.ReturnedCoins;
 
             // Assert
             Assert.AreEqual(1, returnTrayValue);
@@ -710,6 +710,24 @@ namespace Tests
 
             // Assert
             Assert.AreEqual(string.Empty, productInDispenser);
+        }
+
+        [Test]
+        public void GivenAProductHasBeenSelectedWhenAmountInVendingMachineIsHigherThanProdectThenCorrectChangeIsPlacedInCoinReturn()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+
+            sut.SelectProduct(Candy);
+
+            // Act
+            int change = sut.ReturnedCoins;
+
+            // Assert
+            Assert.AreEqual(35, change);
         }
     }
 }

@@ -11,12 +11,12 @@ namespace Libraries
         private string displayMessage;
         private string productDispensed;
 
-        private float returnedCoins;
-        private float totalCoinsAccepted;
-        private float priceOfProduct;
+        private int returnedCoins;
+        private int totalCoinsAccepted;
+        private int priceOfProduct;
 
-        private Dictionary<String, float> coin;
-        private Dictionary<String, float> productPrice;
+        private Dictionary<String, int> coin;
+        private Dictionary<String, int> productPrice;
 
         public string Display
         {
@@ -31,14 +31,14 @@ namespace Libraries
                 }
                 else
                 {
-                    displayMessage = totalCoinsAccepted.ToString(FloatPrecision);
+                    displayMessage = convertIntToString(totalCoinsAccepted);
                 }
 
                 return currentMessage;
             }
         }
 
-        public float ReturnedCoins
+        public int ReturnedCoins
         {
             get
             {
@@ -66,18 +66,18 @@ namespace Libraries
             totalCoinsAccepted = 0;
             productDispensed = string.Empty;
 
-            coin = new Dictionary<string, float>
+            coin = new Dictionary<string, int>
             {
-                { "NICKEL", 0.05f },
-                { "DIME", 0.10f },
-                { "QUARTER", 0.25f }
+                { "NICKEL", 5 },
+                { "DIME", 10 },
+                { "QUARTER", 25 }
             };
 
-            productPrice = new Dictionary<string, float>
+            productPrice = new Dictionary<string, int>
             {
-                { "COLA", 1.00f },
-                { "CHIPS", 0.50f },
-                { "CANDY", 0.65f }
+                { "COLA", 100 },
+                { "CHIPS", 50 },
+                { "CANDY", 65 }
             };
         }
 
@@ -88,7 +88,7 @@ namespace Libraries
                 throw new InvalidCoinNameVendingMachineException(coinName);
             }
 
-            float coinValue = convertCoinNameToCoinValue(coinName);
+            int coinValue = convertCoinNameToCoinValue(coinName);
 
             if (coinValue == 0)
             {
@@ -99,13 +99,13 @@ namespace Libraries
 
             if(totalCoinsAccepted > 0)
             {
-                displayMessage = totalCoinsAccepted.ToString(FloatPrecision);
+                displayMessage = convertIntToString(totalCoinsAccepted);
             }
         }
 
-        private float convertCoinNameToCoinValue(string coinName)
+        private int convertCoinNameToCoinValue(string coinName)
         {
-            float value;
+            int value;
 
             coin.TryGetValue(coinName, out value);
 
@@ -114,7 +114,7 @@ namespace Libraries
 
         public void SelectProduct(string productName)
         {
-            float value;
+            int value;
 
             if(!productPrice.TryGetValue(productName, out value))
             {
@@ -129,12 +129,21 @@ namespace Libraries
 
                 productDispensed = productName;
 
+                returnedCoins = totalCoinsAccepted - priceOfProduct;
+
                 totalCoinsAccepted = 0;
             }
             else
             {
-                displayMessage = priceOfProduct.ToString(FloatPrecision);
+                displayMessage = convertIntToString(priceOfProduct);
             }
+        }
+
+        private string convertIntToString(int value)
+        {
+            float floatValue = value / 100.0f;
+
+            return floatValue.ToString(FloatPrecision);
         }
     }
 }
