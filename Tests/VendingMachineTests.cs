@@ -878,5 +878,18 @@ namespace Tests
             // Assert
             Assert.AreEqual(ExactChange, message);
         }
+
+        [Test]
+        public void WhenVendingMachineDoesNotHaveEnoughToMakeChangeThenDisplayShowsExactChangeOnly()
+        {
+            // Arrange
+            sut = new VendingMachine(1, 1, 1);
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual(ExactChange, message);
+        }
     }
 }
