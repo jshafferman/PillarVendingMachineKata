@@ -53,7 +53,7 @@ namespace Tests
 
         private void EmptyCoinNameInsertCoin()
         {
-            sut.InsertCoin("");
+            sut.InsertCoin(string.Empty);
         }
 
         [Test]
