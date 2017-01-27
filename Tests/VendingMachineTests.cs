@@ -891,5 +891,20 @@ namespace Tests
             // Assert
             Assert.AreEqual(ExactChange, message);
         }
+
+        [Test]
+        public void GivenMachineStartedOutWithChangeAvailableWhenThankYouAsAlreadyDisplayedNowMachineDoesNotHaveEnoughChangeThenDisplayShowsExactChangeOnly()
+        {
+            // Arrange
+            sut = new VendingMachine(4, 1, 1);
+            sut.SelectProduct(Cola);
+            string thankYou = sut.Display;
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual(ExactChange, message);
+        }
     }
 }

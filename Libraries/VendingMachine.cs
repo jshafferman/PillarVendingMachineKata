@@ -37,14 +37,7 @@ namespace Libraries
                 // CQRS being violated here, however it appears to be part of the acceptance criteria
                 if (totalCoinsAccepted == 0)
                 {
-                    if(totalCoinValueInMachine == 0)
-                    {
-                        displayMessage = ExactChange;
-                    }
-                    else
-                    {
-                        displayMessage = InsertCoins;
-                    }
+                    displayMessage = determineDisplayMessage();
                 }
                 else
                 {
