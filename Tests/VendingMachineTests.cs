@@ -12,6 +12,7 @@ namespace Tests
         private const string Dime = "DIME";
         private const string Quarter = "QUARTER";
         private const string Cola = "COLA";
+        private const string Chips = "CHIPS";
 
         private VendingMachine sut;
 
@@ -403,21 +404,6 @@ namespace Tests
         }
 
         [Test]
-        public void GivenEnoughMoneyHasBeenInsertedWhenChipProductIsSelectedThenProductIsDispensed()
-        {
-            // Arrange
-            sut.InsertCoin(Quarter);
-            sut.InsertCoin(Quarter);
-            sut.SelectProduct("CHIPS");
-
-            // Act
-            string product = sut.ProductDispensed;
-
-            // Assert
-            Assert.AreEqual("CHIPS", product);
-        }
-
-        [Test]
         public void GivenEnoughMoneyHasBeenInsertedWhenColaProductHasBeenDispensedThenDisplayShowsThankYou()
         {
             // Arrange
@@ -487,7 +473,7 @@ namespace Tests
         public void GivenNoMoneyHasBeenInsertedWhenChipsProductHasBeenSelectedThenDisplayShowsPriceOfChips()
         {
             // Arrange
-            sut.SelectProduct("CHIPS");
+            sut.SelectProduct(Chips);
 
             // Act
             string message = sut.Display;
@@ -500,7 +486,7 @@ namespace Tests
         public void GivenNoMoneyHasBeenInsertedWhenChipPriceHasAlreadyBeenDisplayedThenDisplayShowsInsertCoins()
         {
             // Arrange
-            sut.SelectProduct("CHIPS");
+            sut.SelectProduct(Chips);
             string firstMessage = sut.Display;
 
             // Act
@@ -515,7 +501,7 @@ namespace Tests
         {
             // Arrange
             sut.InsertCoin(Dime);
-            sut.SelectProduct("CHIPS");
+            sut.SelectProduct(Chips);
             string firstMessage = sut.Display;
 
             // Act
@@ -523,6 +509,21 @@ namespace Tests
 
             // Assert
             Assert.AreEqual("0.10", message);
+        }
+
+        [Test]
+        public void GivenEnoughMoneyHasBeenInsertedWhenChipProductIsSelectedThenProductIsDispensed()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.SelectProduct(Chips);
+
+            // Act
+            string product = sut.ProductDispensed;
+
+            // Assert
+            Assert.AreEqual(Chips, product);
         }
     }
 }
