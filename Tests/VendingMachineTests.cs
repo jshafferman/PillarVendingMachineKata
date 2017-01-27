@@ -848,5 +848,21 @@ namespace Tests
             // Assert
             Assert.AreEqual(InsertCoins, message);
         }
+
+        [Test]
+        public void GivenMoneyHasBeenInsertedWhenDisplayHasAlreadyShownSoldOutThenDisplayShowsTotalValueOfCoins()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.SelectProduct(Cola);
+            
+            string soldOutMessage = sut.Display;
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual(QuarterDisplayAmount, message);
+        }
     }
 }
