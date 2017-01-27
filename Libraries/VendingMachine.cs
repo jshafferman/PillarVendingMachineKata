@@ -24,8 +24,8 @@ namespace Libraries
             {
                 string currentMessage = displayMessage;
 
-                // Note to self, state change in getter method is not a good idea
-                if(totalCoinsAccepted == 0)
+                // CQRS being violated here, however it appears to be part of the acceptance criteria
+                if (totalCoinsAccepted == 0)
                 {
                     displayMessage = InsertCoins;
                 }
@@ -52,7 +52,8 @@ namespace Libraries
             {
                 string currentProduct = productDispensed;
 
-                // Again not a fan of state change in a getter method
+                // CQRS being violated, this is not explicitly demanded by the acceptance criteria
+                // however I still feel the object that is dispensed should not show up twice
                 productDispensed = string.Empty;
 
                 return currentProduct;
