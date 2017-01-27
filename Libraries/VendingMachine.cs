@@ -110,9 +110,13 @@ namespace Libraries
             {
                 priceOfProduct = 1.00f;
             }
-            else
+            else if(productName == "CHIPS")
             {
                 priceOfProduct = 0.50f;
+            }
+            else if(productName == "CANDY")
+            {
+                priceOfProduct = 0.65f;
             }
 
             if (priceOfProduct <= totalCoinsAccepted)

@@ -575,5 +575,18 @@ namespace Tests
             // Assert
             Assert.AreEqual(string.Empty, productInDispenser);
         }
+
+        [Test]
+        public void GivenNoMoneyHasBeenInsertedWhenCandyProductHasBeenSelectedThenDisplayShowsPriceOfCandy()
+        {
+            // Arrange
+            sut.SelectProduct("CANDY");
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual("0.65", message);
+        }
     }
 }
