@@ -20,6 +20,7 @@ namespace Tests
 
         private const string NickelDisplayAmount = "0.05";
         private const string DimeDisplayAmount = "0.10";
+        private const string QuarterDisplayAmount = "0.25";
 
         private VendingMachine sut;
 
@@ -207,7 +208,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("0.25", message);
+            Assert.AreEqual(QuarterDisplayAmount, message);
         }
 
         [Test]
@@ -263,7 +264,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("0.25", message);
+            Assert.AreEqual(QuarterDisplayAmount, message);
         }
 
         [Test]
@@ -473,7 +474,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("0.25", message);
+            Assert.AreEqual(QuarterDisplayAmount, message);
         }
 
         [Test]
