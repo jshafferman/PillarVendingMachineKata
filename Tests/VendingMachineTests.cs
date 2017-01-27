@@ -423,7 +423,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenEnoughMoneyHasBeenInsertedWhenDisplayHasAlreadyShownThankYouThenDisplayShowsInsertCoins()
+        public void GivenEnoughMoneyHasBeenInsertedForColaWhenDisplayHasAlreadyShownThankYouThenDisplayShowsInsertCoins()
         {
             // Arrange
             sut.InsertCoin(Quarter);
@@ -526,6 +526,23 @@ namespace Tests
 
             // Assert
             Assert.AreEqual(ThankYou, message);
+        }
+
+        [Test]
+        public void GivenEnoughMoneyHasBeenInsertedForChipsWhenDisplayHasAlreadyShownThankYouThenDisplayShowsInsertCoins()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+
+            sut.SelectProduct(Chips);
+            string firstMessage = sut.Display;
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual(InsertCoins, message);
         }
 
         [Test]
