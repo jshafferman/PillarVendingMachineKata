@@ -139,6 +139,11 @@ namespace Libraries
             }
         }
 
+        public void SelectReturnCoins()
+        {
+            returnedCoins = totalCoinsAccepted;
+        }
+
         private string convertIntToString(int value)
         {
             float floatValue = value / 100.0f;

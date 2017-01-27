@@ -729,5 +729,23 @@ namespace Tests
             // Assert
             Assert.AreEqual(35, change);
         }
+
+        [Test]
+        public void GivenCoinsHaveBeenInsertedWhenReturnCoinsButtonIsPressedThenAmountOfCoinsIsInReturnTray()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+
+            sut.SelectReturnCoins();
+
+            // Act
+            int value = sut.ReturnedCoins;
+
+            // Assert
+            Assert.AreEqual(100, value);
+        }
     }
 }
