@@ -35,16 +35,21 @@ namespace Libraries
                 string currentMessage = displayMessage;
 
                 // CQRS being violated here, however it appears to be part of the acceptance criteria
-                if (totalCoinsAccepted == 0)
-                {
-                    displayMessage = determineDisplayMessage();
-                }
-                else
-                {
-                    displayMessage = convertIntToString(totalCoinsAccepted);
-                }
+                SetSubsequentDisplayMessages();
 
                 return currentMessage;
+            }
+        }
+
+        private void SetSubsequentDisplayMessages()
+        {
+            if (totalCoinsAccepted == 0)
+            {
+                displayMessage = determineDisplayMessage();
+            }
+            else
+            {
+                displayMessage = convertIntToString(totalCoinsAccepted);
             }
         }
 
@@ -79,6 +84,15 @@ namespace Libraries
             totalCoinsAccepted = 0;
             productDispensed = string.Empty;
 
+            InitializeDictionaries(numberOfNickels, numberOfDimes, numberOfQuarters);
+
+            totalCoinValueInMachine = calculateTotalInMachine();
+
+            displayMessage = determineDisplayMessage();
+        }
+
+        private void InitializeDictionaries(int numberOfNickels, int numberOfDimes, int numberOfQuarters)
+        {
             coinValues = new Dictionary<string, int>
             {
                 { Nickel, 5 },
@@ -106,16 +120,13 @@ namespace Libraries
                 { Chips, 0 },
                 { Candy, 0 }
             };
-
-            totalCoinValueInMachine = calculateTotalInMachine();
-
-            displayMessage = determineDisplayMessage();
         }
 
         private string determineDisplayMessage()
         {
-            // Not the most efficient way to solve this issue, however it does give us
-            // the correct default message and can be adjusted now that tests are in place
+            // Not the most efficient way to solve this issue
+            // Loops through price and coin value key pairs to determine
+            // if the vending machine can produce change for any product
             foreach(var price in productPrice.Values)
             {
                 var productPrice = price;
@@ -144,33 +155,53 @@ namespace Libraries
 
         private int calculateTotalInMachine()
         {
-            int total = coinInMachine[Nickel] * 5 + coinInMachine[Dime] * 10 + coinInMachine[Quarter] * 25;
+            int total = 0;
+
+            // calculates the total amount of money in machine by finding
+            // matching coins in machine and there respective values
+            foreach(var coin in coinValues)
+            {
+                string coinName = coin.Key;
+                int coinValue = coin.Value;
+
+                total += (coinInMachine[coinName] * coinValue);
+            }
 
             return total;
         }
 
         public void InsertCoin(string coinName)
         {
-            if(String.IsNullOrWhiteSpace(coinName))
+            if (String.IsNullOrWhiteSpace(coinName))
             {
                 throw new InvalidCoinNameVendingMachineException(coinName);
             }
 
             int coinValue = convertCoinNameToCoinValue(coinName);
 
-            if (coinValue == 0)
-            {
-                returnedCoins = 1;
-            }
+            DetermineIfCoinIsReturned(coinValue);
 
+            HandleCoinInMachine(coinValue);
+        }
+
+        private void HandleCoinInMachine(int coinValue)
+        {
             totalCoinsAccepted += coinValue;
 
-            if(totalCoinsAccepted > 0)
+            if (totalCoinsAccepted > 0)
             {
                 displayMessage = convertIntToString(totalCoinsAccepted);
             }
 
             totalCoinValueInMachine += totalCoinsAccepted;
+        }
+
+        private void DetermineIfCoinIsReturned(int coinValue)
+        {
+            if (coinValue == 0)
+            {
+                returnedCoins = 1;
+            }
         }
 
         private int convertCoinNameToCoinValue(string coinName)
@@ -197,24 +228,29 @@ namespace Libraries
 
             if (numberInMachine > 0)
             {
-                if(priceOfProduct <= totalCoinsAccepted)
-                {
-                    displayMessage = "THANK YOU";
-
-                    productDispensed = productName;
-
-                    returnedCoins = totalCoinsAccepted - priceOfProduct;
-
-                    totalCoinsAccepted = 0;
-                }
-                else
-                {
-                    displayMessage = convertIntToString(priceOfProduct);
-                }
+                HandleProductsAvailableInMachine(productName);
             }
             else
             {
                 displayMessage = "SOLD OUT";
+            }
+        }
+
+        private void HandleProductsAvailableInMachine(string productName)
+        {
+            if (priceOfProduct <= totalCoinsAccepted)
+            {
+                displayMessage = "THANK YOU";
+
+                productDispensed = productName;
+
+                returnedCoins = totalCoinsAccepted - priceOfProduct;
+
+                totalCoinsAccepted = 0;
+            }
+            else
+            {
+                displayMessage = convertIntToString(priceOfProduct);
             }
         }
 
@@ -233,7 +269,6 @@ namespace Libraries
 
             totalCoinsAccepted = 0;
 
-            
             displayMessage = InsertCoins;
         }
 
