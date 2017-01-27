@@ -8,12 +8,15 @@ namespace Tests
     {
         private const string InsertCoins = "INSERT COINS";
         private const string ThankYou = "THANK YOU";
+
         private const string Penny = "PENNY";
         private const string Nickel = "NICKEL";
         private const string Dime = "DIME";
         private const string Quarter = "QUARTER";
+
         private const string Cola = "COLA";
         private const string Chips = "CHIPS";
+        private const string Candy = "CANDY";
 
         private VendingMachine sut;
 
@@ -580,7 +583,7 @@ namespace Tests
         public void GivenNoMoneyHasBeenInsertedWhenCandyProductHasBeenSelectedThenDisplayShowsPriceOfCandy()
         {
             // Arrange
-            sut.SelectProduct("CANDY");
+            sut.SelectProduct(Candy);
 
             // Act
             string message = sut.Display;
@@ -593,7 +596,7 @@ namespace Tests
         public void GivenNoMoneyHasBeenInsertedWhenCandyPriceHasAlreadyBeenDisplayedThenDisplayShowsInsertCoins()
         {
             // Arrange
-            sut.SelectProduct("CANDY");
+            sut.SelectProduct(Candy);
             string firstMessage = sut.Display;
 
             // Act
@@ -608,7 +611,7 @@ namespace Tests
         {
             // Arrange
             sut.InsertCoin(Nickel);
-            sut.SelectProduct("CANDY");
+            sut.SelectProduct(Candy);
             string firstMessage = sut.Display;
 
             // Act
@@ -627,7 +630,7 @@ namespace Tests
             sut.InsertCoin(Dime);
             sut.InsertCoin(Nickel);
 
-            sut.SelectProduct("CANDY");
+            sut.SelectProduct(Candy);
 
             // Act
             string message = sut.Display;
@@ -645,7 +648,7 @@ namespace Tests
             sut.InsertCoin(Dime);
             sut.InsertCoin(Nickel);
 
-            sut.SelectProduct("CANDY");
+            sut.SelectProduct(Candy);
             string firstMessage = sut.Display;
 
             // Act
@@ -664,13 +667,13 @@ namespace Tests
             sut.InsertCoin(Dime);
             sut.InsertCoin(Nickel);
 
-            sut.SelectProduct("CANDY");
+            sut.SelectProduct(Candy);
 
             // Act
             string productInDispenser = sut.ProductDispensed;
 
             // Assert
-            Assert.AreEqual("CANDY", productInDispenser);
+            Assert.AreEqual(Candy, productInDispenser);
         }
 
         [Test]
@@ -682,7 +685,7 @@ namespace Tests
             sut.InsertCoin(Dime);
             sut.InsertCoin(Nickel);
 
-            sut.SelectProduct("CANDY");
+            sut.SelectProduct(Candy);
 
             string productDispesned = sut.ProductDispensed;
 
