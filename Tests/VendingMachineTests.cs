@@ -9,6 +9,7 @@ namespace Tests
     {
         private const string InsertCoins = "INSERT COINS";
         private const string ThankYou = "THANK YOU";
+        private const string SoldOut = "SOLD OUT";
 
         private const string Penny = "PENNY";
         private const string Nickel = "NICKEL";
@@ -830,7 +831,22 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("SOLD OUT", message);
+            Assert.AreEqual(SoldOut, message);
+        }
+
+        [Test]
+        public void GivenNoMoneyHasBeenInsertedWhenDisplayHasAlreadyShownSoldOutThenDisplayShowsInsertCoins()
+        {
+            // Arrange
+            sut.SelectProduct(Cola);
+
+            string soldOutMessage = sut.Display;
+
+            // Act
+            string message = sut.Display;
+
+            // Assert
+            Assert.AreEqual(InsertCoins, message);
         }
     }
 }
