@@ -16,6 +16,7 @@ namespace Libraries
         private float priceOfProduct;
 
         private Dictionary<String, float> coin;
+        private Dictionary<String, float> productPrice;
 
         public string Display
         {
@@ -71,6 +72,13 @@ namespace Libraries
                 { "DIME", 0.10f },
                 { "QUARTER", 0.25f }
             };
+
+            productPrice = new Dictionary<string, float>
+            {
+                { "COLA", 1.00f },
+                { "CHIPS", 0.50f },
+                { "CANDY", 0.65f }
+            };
         }
 
         public void InsertCoin(string coinName)
@@ -106,18 +114,7 @@ namespace Libraries
 
         public void SelectProduct(string productName)
         {
-            if(productName == "COLA")
-            {
-                priceOfProduct = 1.00f;
-            }
-            else if(productName == "CHIPS")
-            {
-                priceOfProduct = 0.50f;
-            }
-            else if(productName == "CANDY")
-            {
-                priceOfProduct = 0.65f;
-            }
+            priceOfProduct = productPrice[productName];
 
             if (priceOfProduct <= totalCoinsAccepted)
             {
