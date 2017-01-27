@@ -405,7 +405,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenEnoughMoneyHasBeenInsertedWhenColaProductHasBeenDispensedThenDisplayShowsThankYou()
+        public void GivenEnoughMoneyHasBeenInsertedWhenColaProductHasBeenSelectedThenDisplayShowsThankYou()
         {
             // Arrange
             sut.InsertCoin(Quarter);
@@ -513,7 +513,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenEnoughMoneyHasBeenInsertedWhenChipProductHasBeenDispensedThenDisplayShowsThankYou()
+        public void GivenEnoughMoneyHasBeenInsertedWhenChipProductHasBeenSelectedThenDisplayShowsThankYou()
         {
             // Arrange
             sut.InsertCoin(Quarter);
