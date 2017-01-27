@@ -525,5 +525,21 @@ namespace Tests
             // Assert
             Assert.AreEqual(Chips, productInDispenser);
         }
+
+        [Test]
+        public void GivenEnoughMoneyHasBeenInsertedWhenChipProductHasAlreadyBeenDispensedThenProductInDispenserIsEmpty()
+        {
+            // Arrange
+            sut.InsertCoin(Quarter);
+            sut.InsertCoin(Quarter);
+            sut.SelectProduct(Chips);
+            string productDispesned = sut.ProductDispensed;
+
+            // Act
+            string productInDispenser = sut.ProductDispensed;
+
+            // Assert
+            Assert.AreEqual(string.Empty, productInDispenser);
+        }
     }
 }
