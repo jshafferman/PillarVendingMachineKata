@@ -23,6 +23,10 @@ namespace Tests
         private const string DimeDisplayAmount = "0.10";
         private const string QuarterDisplayAmount = "0.25";
 
+        private const string ColaDisplayAmount = "1.00";
+        private const string ChipsDisplayAmount = "0.50";
+        private const string CandyDisplayAmount = "0.65";
+
         private VendingMachine sut;
 
         [SetUp]
@@ -354,7 +358,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("1.00", message);
+            Assert.AreEqual(ColaDisplayAmount, message);
         }
 
         [Test]
@@ -368,7 +372,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("1.00", message);
+            Assert.AreEqual(ColaDisplayAmount, message);
         }
 
         [Test]
@@ -499,7 +503,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("0.50", message);
+            Assert.AreEqual(ChipsDisplayAmount, message);
         }
 
         [Test]
@@ -605,7 +609,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("0.65", message);
+            Assert.AreEqual(CandyDisplayAmount, message);
         }
 
         [Test]
@@ -782,7 +786,7 @@ namespace Tests
             string message = sut.Display;
 
             // Assert
-            Assert.AreEqual("1.00", message);
+            Assert.AreEqual(ColaDisplayAmount, message);
         }
     }
 }
